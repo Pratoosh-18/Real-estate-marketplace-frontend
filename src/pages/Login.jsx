@@ -25,7 +25,7 @@ const Login = () => {
       localStorage.setItem("realestatert", response.data.updatedUser.refreshToken);
       setError('');
       console.log(user)
-      navigate("/")
+      navigate("/listings")
     } catch (err) {
       setError('Invalid email or password');
     }

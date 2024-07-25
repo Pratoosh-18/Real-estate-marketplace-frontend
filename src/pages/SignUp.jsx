@@ -7,12 +7,15 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [coverImg, setCoverImg] = useState(null);
+  const [coverImgPreview, setCoverImgPreview] = useState(null);
   const [error, setError] = useState('');
 
   let navigate = useNavigate();
 
   const handleCoverImgChange = (e) => {
-    setCoverImg(e.target.files[0]);
+    const file = e.target.files[0];
+    setCoverImg(file);
+    setCoverImgPreview(URL.createObjectURL(file));
   };
 
   const handleSubmit = async (e) => {
@@ -84,7 +87,7 @@ const SignUp = () => {
               required
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="coverImg">
               Profile Photo
             </label>
@@ -96,6 +99,11 @@ const SignUp = () => {
               required
             />
           </div>
+          {coverImgPreview && (
+            <div className="mb-4 w-full items-center flex justify-center">
+              <img src={coverImgPreview} alt="Profile Preview" className="w-[150px] h-[150px] object-cover rounded-lg" />
+            </div>
+          )}
           {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
           <div className="flex items-center justify-between">
             <button

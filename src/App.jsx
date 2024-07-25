@@ -14,8 +14,9 @@ import Notifications from "./pages/Notifications";
 import ListingDetail from "./pages/ListingDetails";
 import { ListingContextProvider } from "./context/ListingContext";
 import { UserContextProvider } from "./context/UserContext";
-import ListingsPage from "./pages/ListingsPage";
+
 import CreateListing from "./pages/CreateListing";
+import ListingsPage from "./pages/ListingsPage";
 
 {
   /* {import.meta.env.VITE_REACT_TESTING_ENV} */
