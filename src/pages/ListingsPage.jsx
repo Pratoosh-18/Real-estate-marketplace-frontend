@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { ListingContext } from "../context/ListingContext";
 import ListingCard from "../components/ListingCard";
-import Loader from "../components/Loader";
 import ListingCardSkeleton from "../components/ListingCardSkeleton";
 
 const ListingsPage = () => {
