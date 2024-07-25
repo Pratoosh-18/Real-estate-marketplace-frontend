@@ -43,6 +43,7 @@ const ListingsPage = () => {
                     desc={item.description}
                     originalPrice={item.regularPrice}
                     discountedPrice={item.discountPrice}
+                    listingDate={item.createdAt}
                   />
                 ))}
               </div>
