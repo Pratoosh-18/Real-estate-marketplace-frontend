@@ -1,20 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Importing icons for menu toggle
+import { UserContext } from '../context/UserContext';
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
   const [activeLink, setActiveLink] = useState(location.pathname);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [paths, setPaths] = useState(['/', '/notifications', '/profile', '/login', '/signup']);
+
+  useEffect(() => {
+    if (user && Object.keys(user).length > 0) {
+      setPaths(['/', '/notifications', '/profile', '/logout']);
+    } else {
+      setPaths(['/', '/notifications', '/profile', '/login', '/signup']);
+    }
+  }, [user]);
 
   useEffect(() => {
     setActiveLink(location.pathname);
   }, [location]);
 
   const handleClick = (path) => {
-    setActiveLink(path);
-    setMenuOpen(false); 
-    window.scrollTo(0, 0);
+    if (path === '/logout') {
+      setUser({});
+      navigate('/');
+    } else {
+      setActiveLink(path);
+      setMenuOpen(false);
+      window.scrollTo(0, 0);
+    }
   };
 
   const toggleMenu = () => {
@@ -38,17 +55,26 @@ const Navbar = () => {
               menuOpen ? 'top-[10vh] opacity-100 z-40' : 'top-[-100vh] md:opacity-100 opacity-0'
             }`}
           >
-            {['/', '/notifications', '/profile', '/login', '/signup'].map((path) => (
+            {paths.map((path) => (
               <li key={path} className="text-center md:text-left">
-                <Link
-                  to={path}
-                  className={`block py-2 md:py-0 text-base transition duration-300 ${
-                    activeLink === path ? 'text-black border-b-2 border-black' : 'text-gray-500 hover:text-black'
-                  }`}
-                  onClick={() => handleClick(path)}
-                >
-                  {path === '/' ? 'Home' : path.replace('/', '').charAt(0).toUpperCase() + path.slice(2).replace('/', '')}
-                </Link>
+                {path === '/logout' ? (
+                  <button
+                    className="block py-2 md:py-0 text-base transition duration-300 text-gray-500 hover:text-black"
+                    onClick={() => handleClick(path)}
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to={path}
+                    className={`block py-2 md:py-0 text-base transition duration-300 ${
+                      activeLink === path ? 'text-black border-b-2 border-black' : 'text-gray-500 hover:text-black'
+                    }`}
+                    onClick={() => handleClick(path)}
+                  >
+                    {path === '/' ? 'Home' : path.replace('/', '').charAt(0).toUpperCase() + path.slice(2).replace('/', '')}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

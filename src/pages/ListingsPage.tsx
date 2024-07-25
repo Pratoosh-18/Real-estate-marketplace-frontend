@@ -33,7 +33,7 @@ const ListingsPage = () => {
             <>Loading.....</>
           ) : (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+              <div className="flex flex-wrap justify-center gap-4 my-4">
                 {listings.slice(0, visibleListings).map((item) => (
                   <ListingCard
                     key={item._id}

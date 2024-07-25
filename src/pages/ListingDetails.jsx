@@ -6,6 +6,7 @@ const ListingDetail = () => {
   const { id } = useParams();
   const { listings } = useContext(ListingContext);
   const listing = listings.find((item) => item._id === id);
+  console.log(listing)
 
   if (!listing) return <div>Loading...</div>;
 
@@ -13,6 +14,7 @@ const ListingDetail = () => {
     <div>
       <h1>{listing.name}</h1>
       <p>{listing.description}</p>
+      <p>{listing.owner.username}</p>
     </div>
   );
 };

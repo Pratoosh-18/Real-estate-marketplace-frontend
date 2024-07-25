@@ -22,9 +22,9 @@ const Login = () => {
       // const response = await axios.post('http://localhost:8000/api/v1/user/login', { email, password });
       setUserData(response.data.updatedUser);
       setUser(response.data.updatedUser)
-      console.log(user)
       localStorage.setItem("realestatert", response.data.updatedUser.refreshToken);
       setError('');
+      console.log(user)
       navigate("/")
     } catch (err) {
       setError('Invalid email or password');
