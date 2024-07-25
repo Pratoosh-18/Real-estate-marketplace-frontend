@@ -10,7 +10,6 @@ import Footer from "./components/Footer";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import Notifications from "./pages/Notifications";
 import ListingDetail from "./pages/ListingDetails";
 import { ListingContextProvider } from "./context/ListingContext";
 import { UserContextProvider } from "./context/UserContext";
@@ -41,7 +40,6 @@ const AppContent = () => {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/notifications" element={<Notifications />} />
             <Route path="/listing/:id" element={<ListingDetail />} />
           </Routes>
           {/* {showNavbarAndFooter && <Footer />} */}

@@ -20,6 +20,7 @@ const ListingsPage = () => {
       );
       const reversedListings = response.data.listings.reverse();
       setListings(reversedListings);
+      console.log(listings)
     };
     getAllListings();
   }, [setListings]);

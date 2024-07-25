@@ -10,9 +10,13 @@ const ListingCard = ({ id, name, desc, img, originalPrice, discountedPrice, list
     return `${day}-${month}-${year}`;
   }
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  }
+
   return (
     <div key={id} className="w-[250px] rounded overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
-      <Link to={`/listing/${id}`} className="block">
+      <Link onClick={scrollToTop} to={`/listing/${id}`} className="block">
         <img src={img} alt={name} className="w-full h-[150px] object-cover" />
         <div className="p-2 h-full flex flex-col justify-between">
           <div>

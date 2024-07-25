@@ -9,13 +9,13 @@ const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
   const [activeLink, setActiveLink] = useState(location.pathname);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [paths, setPaths] = useState(['/', '/notifications', '/profile', '/login', '/signup']);
+  const [paths, setPaths] = useState(['/', '/profile', '/login', '/signup']);
 
   useEffect(() => {
     if (user && Object.keys(user).length > 0) {
-      setPaths(['/', '/notifications', '/profile', '/logout']);
+      setPaths(['/', '/profile', '/logout']);
     } else {
-      setPaths(['/', '/notifications', '/profile', '/login', '/signup']);
+      setPaths(['/', '/profile', '/login', '/signup']);
     }
   }, [user]);
 
