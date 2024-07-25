@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import Carousel from "../components/Carousel";
-import axios from "axios";
+import axios from "axios"
 import { Link } from "react-router-dom";
 import { ListingContext } from "../context/ListingContext";
+import ListingCard from "../components/ListingCard";
 
 const Home = () => {
   const { listings, setListings } = useContext(ListingContext);
@@ -20,16 +21,17 @@ const Home = () => {
   return (
     <div>
       <Carousel />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-        {listings.map((item) => (
-          <div key={item._id} className="border p-4 rounded-lg shadow-lg">
-            <Link to={`/listing/${item._id}`} className="block">
-              <h2 className="text-xl font-semibold">{item.name}</h2>
-              <p>ID: {item._id}</p>
-            </Link>
+      {listings.length === 0 ? (
+        <>Loading.....</>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+            {listings.map((item) => (
+              <ListingCard id={item._id} name={item.name} img={item.imageUrls[0]}  desc={item.description} originalPrice={item.regularPrice} discountedPrice={item.discountPrice}/>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 };
