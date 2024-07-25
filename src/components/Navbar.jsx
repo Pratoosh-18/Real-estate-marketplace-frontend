@@ -28,21 +28,21 @@ const Navbar = () => {
           <Link to="/" className="text-black text-2xl font-bold flex items-center">
             <p>LOGO</p>
           </Link>
-          <div className="lg:hidden">
+          <div className="md:hidden">
             <button onClick={toggleMenu} className="text-black focus:outline-none">
               {menuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
             </button>
           </div>
           <ul
-            className={`lg:flex lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-6 absolute lg:static bg-white w-full lg:w-auto left-0 lg:left-auto transition-all duration-300 ease-in-out ${
-              menuOpen ? 'top-[10vh] opacity-100 z-40' : 'top-[-100vh] lg:opacity-100 opacity-0'
+            className={`md:flex md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-6 absolute md:static bg-white w-full md:w-auto left-0 md:left-auto transition-all duration-300 ease-in-out ${
+              menuOpen ? 'top-[10vh] opacity-100 z-40' : 'top-[-100vh] md:opacity-100 opacity-0'
             }`}
           >
             {['/', '/notifications', '/profile', '/login', '/signup'].map((path) => (
-              <li key={path} className="text-center lg:text-left">
+              <li key={path} className="text-center md:text-left">
                 <Link
                   to={path}
-                  className={`block py-2 lg:py-0 text-base transition duration-300 ${
+                  className={`block py-2 md:py-0 text-base transition duration-300 ${
                     activeLink === path ? 'text-black border-b-2 border-black' : 'text-gray-500 hover:text-black'
                   }`}
                   onClick={() => handleClick(path)}

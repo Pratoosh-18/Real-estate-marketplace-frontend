@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -10,6 +11,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState('');
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,13 +25,14 @@ const Login = () => {
       console.log(user)
       localStorage.setItem("realestatert", response.data.updatedUser.refreshToken);
       setError('');
+      navigate("/")
     } catch (err) {
       setError('Invalid email or password');
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center h-[80vh] bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form onSubmit={handleSubmit}>
@@ -64,7 +68,7 @@ const Login = () => {
               type="submit"
               className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Sign In
+              Log In
             </button>
           </div>
         </form>

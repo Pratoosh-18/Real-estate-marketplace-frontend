@@ -14,6 +14,7 @@ import Notifications from "./pages/Notifications";
 import ListingDetail from "./pages/ListingDetails";
 import { ListingContextProvider } from "./context/ListingContext";
 import { UserContextProvider } from "./context/UserContext";
+import ListingsPage from "./pages/ListingsPage";
 
 {
   /* {import.meta.env.VITE_REACT_TESTING_ENV} */
@@ -33,6 +34,7 @@ const AppContent = () => {
           <Navbar/>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/listings" element={<ListingsPage />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
