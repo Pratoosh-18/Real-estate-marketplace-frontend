@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa'; // Importing icons for menu toggle
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { UserContext } from '../context/UserContext';
 
 const Navbar = () => {
@@ -9,30 +9,19 @@ const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
   const [activeLink, setActiveLink] = useState(location.pathname);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [paths, setPaths] = useState(['/', '/profile', '/login', '/signup']);
+  const [paths, setPaths] = useState(['/','/about', '/login', '/signup']);
 
   useEffect(() => {
     if (user && Object.keys(user).length > 0) {
-      setPaths(['/', '/profile', '/logout']);
+      setPaths(['/','/about']);
     } else {
-      setPaths(['/', '/profile', '/login', '/signup']);
+      setPaths(['/','/about', '/login', '/signup']);
     }
   }, [user]);
 
   useEffect(() => {
     setActiveLink(location.pathname);
   }, [location]);
-
-  const handleClick = (path) => {
-    if (path === '/logout') {
-      setUser({});
-      navigate('/');
-    } else {
-      setActiveLink(path);
-      setMenuOpen(false);
-      window.scrollTo(0, 0);
-    }
-  };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -77,6 +66,23 @@ const Navbar = () => {
                 )}
               </li>
             ))}
+            {user && Object.keys(user).length > 0 && (
+              <li className="text-center md:text-left">
+                <Link
+                  to="/profile"
+                  className={`block py-2 md:py-0 text-base transition duration-300 ${
+                    activeLink === '/profile' ? 'text-black border-b-2 border-black' : 'text-gray-500 hover:text-black'
+                  }`}
+                  onClick={() => handleClick('/profile')}
+                >
+                  <img
+                    src={user.avatar}
+                    alt="User Avatar"
+                    className="w-8 h-8 rounded-full border border-gray-300"
+                  />
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </nav>

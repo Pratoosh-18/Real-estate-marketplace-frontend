@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Logo and Description */}
           <div className="text-center md:text-left mb-4 md:mb-0">
-            <h1 className="text-2xl font-bold mb-2">Real Estate Marketplace</h1>
+            <h1 className="text-2xl font-bold mb-2">EstateEdge | Real Estate Marketplace</h1>
             <p className="text-gray-600">Connecting you with your dream home.</p>
           </div>
 

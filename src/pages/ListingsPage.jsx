@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { ListingContext } from "../context/ListingContext";
+import { UserContext } from "../context/UserContext";
 import ListingCard from "../components/ListingCard";
 import ListingCardSkeleton from "../components/ListingCardSkeleton";
 
 const ListingsPage = () => {
+  const { user } = useContext(UserContext);
   const { listings, setListings } = useContext(ListingContext);
   const [visibleListings, setVisibleListings] = useState(9);
   const [sortOption, setSortOption] = useState("date-new");
@@ -12,6 +14,7 @@ const ListingsPage = () => {
   const [showFurnished, setShowFurnished] = useState(false);
   const [searchAddress, setSearchAddress] = useState("");
   const [searchName, setSearchName] = useState("");
+  const [finalListings, setFinalListings] = useState([]);
 
   useEffect(() => {
     const getAllListings = async () => {
@@ -20,8 +23,9 @@ const ListingsPage = () => {
       );
       const reversedListings = response.data.listings.reverse();
       setListings(reversedListings);
-      console.log(listings)
+      console.log(listings);
     };
+
     getAllListings();
   }, [setListings]);
 
@@ -65,7 +69,8 @@ const ListingsPage = () => {
         : true;
       const matchesParking = showParking ? listing.parking : true;
       const matchesFurnished = showFurnished ? listing.furnished : true;
-      return matchesAddress && matchesName && matchesParking && matchesFurnished;
+      const isNotOwner = listing.owner.email !== user.email;
+      return matchesAddress && matchesName && matchesParking && matchesFurnished && isNotOwner;
     });
   };
 
@@ -140,7 +145,7 @@ const ListingsPage = () => {
       {/* Listings */}
       <div className="w-full md:w-[70%] lg:w-[75%] p-4">
         {listings.length === 0 ? (
-          <div  className="flex flex-wrap justify-center gap-4 my-4">
+          <div className="flex flex-wrap justify-center gap-4 my-4">
             <ListingCardSkeleton/>
             <ListingCardSkeleton/>
             <ListingCardSkeleton/>

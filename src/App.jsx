@@ -16,6 +16,7 @@ import { UserContextProvider } from "./context/UserContext";
 
 import CreateListing from "./pages/CreateListing";
 import ListingsPage from "./pages/ListingsPage";
+import About from "./pages/About";
 
 {
   /* {import.meta.env.VITE_REACT_TESTING_ENV} */
@@ -40,6 +41,7 @@ const AppContent = () => {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/about" element={<About />} />
             <Route path="/listing/:id" element={<ListingDetail />} />
           </Routes>
           {/* {showNavbarAndFooter && <Footer />} */}
