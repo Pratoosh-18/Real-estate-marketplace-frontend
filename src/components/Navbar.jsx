@@ -43,7 +43,7 @@ const Navbar = () => {
       <nav className="fixed h-[10vh] w-full z-50 bg-white p-4 shadow-md flex justify-between items-center">
         <div className="container mx-auto flex flex-wrap items-center justify-between">
           <Link to="/" className="text-black text-2xl font-bold flex items-center">
-            <p>LOGO</p>
+            <p>EstateEdge</p>
           </Link>
           <div className="md:hidden">
             <button onClick={toggleMenu} className="text-black focus:outline-none">
