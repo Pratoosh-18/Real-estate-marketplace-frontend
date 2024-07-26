@@ -6,24 +6,18 @@ import { UserContext } from '../context/UserContext';
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [activeLink, setActiveLink] = useState(location.pathname);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [paths, setPaths] = useState(['/','/about', '/login', '/signup']);
+  const [paths, setPaths] = useState(['/','/listings','/about', '/login', '/signup']);
 
   useEffect(() => {
     if (user && Object.keys(user).length > 0) {
-      setPaths(['/','/about']);
+      setPaths(['/','/listings','/about']);
     } else {
-      setPaths(['/','/about', '/login', '/signup']);
+      setPaths(['/','/listings','/about', '/login', '/signup']);
     }
   }, [user]);
-
-  const handleClick = (path) => {
-    if(path === '/profile'){
-      navigate('/profile')
-    }
-  }
 
   useEffect(() => {
     setActiveLink(location.pathname);
@@ -33,12 +27,26 @@ const Navbar = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const handleLinkClick = (path) => {
+    if (path === '/logout') {
+      // Handle logout functionality here
+    } else if (path === '/profile') {
+      navigate('/profile');
+    } else {
+      navigate(path);
+    }
+    setMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
-      <nav className="fixed h-[10vh] w-full z-50 bg-white p-4 shadow-md flex justify-between items-center">
+      <nav className="fixed h-[10vh] w-full z-50 bg-slate-100 p-4 shadow-md flex justify-between items-center">
         <div className="container mx-auto flex flex-wrap items-center justify-between">
           <Link to="/" className="text-black text-2xl font-bold flex items-center">
-            <p>EstateEdge</p>
+            <p>
+              <span className='text-gray-600'>Estate</span>Edge
+            </p>
           </Link>
           <div className="md:hidden">
             <button onClick={toggleMenu} className="text-black focus:outline-none">
@@ -46,7 +54,7 @@ const Navbar = () => {
             </button>
           </div>
           <ul
-            className={`md:flex md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-6 absolute md:static bg-white w-full md:w-auto left-0 md:left-auto transition-all duration-300 ease-in-out ${
+            className={`md:flex md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-6 absolute md:static bg-slate-100 w-full md:w-auto left-0 md:left-auto transition-all duration-300 ease-in-out ${
               menuOpen ? 'top-[10vh] opacity-100 z-40' : 'top-[-100vh] md:opacity-100 opacity-0'
             }`}
           >
@@ -55,17 +63,17 @@ const Navbar = () => {
                 {path === '/logout' ? (
                   <button
                     className="block py-2 md:py-0 text-base transition duration-300 text-gray-500 hover:text-black"
-                    onClick={() => handleClick(path)}
+                    onClick={() => handleLinkClick(path)}
                   >
                     Logout
                   </button>
                 ) : (
                   <Link
                     to={path}
-                    className={`block py-2 md:py-0 text-base transition duration-300 ${
+                    className={`bg-slate-100 text-sm block py-2 md:py-0 transition duration-300 ${
                       activeLink === path ? 'text-black border-b-2 border-black' : 'text-gray-500 hover:text-black'
                     }`}
-                    onClick={() => handleClick(path)}
+                    onClick={() => handleLinkClick(path)}
                   >
                     {path === '/' ? 'Home' : path.replace('/', '').charAt(0).toUpperCase() + path.slice(2).replace('/', '')}
                   </Link>
@@ -73,13 +81,13 @@ const Navbar = () => {
               </li>
             ))}
             {user && Object.keys(user).length > 0 && (
-              <li className="text-center md:text-left">
+              <li className="bg-slate-100 text-center md:text-left">
                 <Link
                   to="/profile"
-                  className={`block py-2 md:py-0 text-base transition duration-300 ${
+                  className={`bg-slate-100 block py-2 md:py-0 text-base transition duration-300 ${
                     activeLink === '/profile' ? 'text-black border-b-2 border-black' : 'text-gray-500 hover:text-black'
                   }`}
-                  onClick={() => handleClick('/profile')}
+                  onClick={() => handleLinkClick('/profile')}
                 >
                   <img
                     src={user.avatar}

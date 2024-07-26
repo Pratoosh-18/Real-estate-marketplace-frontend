@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaBed, FaParking, FaCouch } from "react-icons/fa";
 
-const ListingCard = ({
+const ViewCard = ({
   id,
   name,
   desc,
@@ -23,7 +23,7 @@ const ListingCard = ({
       key={id}
       className="w-[250px] rounded overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
     >
-      <Link onClick={scrollToTop} to={`/listing/${id}`} className="block">
+      <Link onClick={scrollToTop} to={`/listings`} className="block">
         <div className="overflow-hidden">
           <img
             src={img}
@@ -78,4 +78,4 @@ const ListingCard = ({
   );
 };
 
-export default ListingCard;
+export default ViewCard;

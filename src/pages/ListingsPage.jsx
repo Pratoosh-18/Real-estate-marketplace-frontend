@@ -15,6 +15,7 @@ const ListingsPage = () => {
   const [searchAddress, setSearchAddress] = useState("");
   const [searchName, setSearchName] = useState("");
   const [finalListings, setFinalListings] = useState([]);
+  const [isFilterVisible, setIsFilterVisible] = useState(false); // State to handle filter visibility
 
   useEffect(() => {
     const getAllListings = async () => {
@@ -78,11 +79,106 @@ const ListingsPage = () => {
   const sortedAndFilteredListings = filterListings(sortedListings);
 
   return (
-    <div className="flex">
-      {/* Sidebar */}
-      <div className="hidden min-h-[90vh] md:block md:w-[30%] lg:w-[25%] bg-white border-r border-gray-200 p-4 rounded-lg shadow-md">
+    <div className="flex flex-col md:flex-row">
+      {/* Filter & Sort Section for Mobile */}
+      <div className="md:hidden">
+        <button
+          onClick={() => setIsFilterVisible(!isFilterVisible)}
+          className="text-black w-full p-2 mb-2 shadow-md"
+        >
+          {isFilterVisible ? "Hide Filters" : "Show Filters"}
+        </button>
+        {isFilterVisible && (
+          <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4">Filter & Sort</h2>
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">Search by Address:</label>
+              <input
+                type="text"
+                value={searchAddress}
+                onChange={handleAddressChange}
+                placeholder="Enter address"
+                className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">Search by Name:</label>
+              <input
+                type="text"
+                value={searchName}
+                onChange={handleNameChange}
+                placeholder="Enter name"
+                className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">Sort by:</label>
+              <select
+                value={sortOption}
+                onChange={handleSortChange}
+                className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="price-low-high">Price: Low to High</option>
+                <option value="price-high-low">Price: High to Low</option>
+                <option value="date-new">Date: New to Old</option>
+                <option value="date-old">Date: Old to New</option>
+              </select>
+            </div>
+
+            <div className="mb-4 flex items-center">
+              <input
+                type="checkbox"
+                id="showParking"
+                checked={showParking}
+                onChange={() => setShowParking(!showParking)}
+                className="mr-2"
+              />
+              <label htmlFor="showParking" className="text-sm font-medium text-gray-700">Parking</label>
+            </div>
+
+            <div className="mb-4 flex items-center">
+              <input
+                type="checkbox"
+                id="showFurnished"
+                checked={showFurnished}
+                onChange={() => setShowFurnished(!showFurnished)}
+                className="mr-2"
+              />
+              <label htmlFor="showFurnished" className="text-sm font-medium text-gray-700">Furnished</label>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Sidebar for Desktop */}
+      <div className="hidden md:block md:w-[30%] lg:w-[25%] bg-white border-r border-gray-200 p-4 rounded-lg shadow-md text-sm">
         <h2 className="text-xl font-semibold mb-4">Filter & Sort</h2>
-        
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Search by Address:</label>
+          <input
+            type="text"
+            value={searchAddress}
+            onChange={handleAddressChange}
+            placeholder="Enter address"
+            className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Search by Name:</label>
+          <input
+            type="text"
+            value={searchName}
+            onChange={handleNameChange}
+            placeholder="Enter name"
+            className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Sort by:</label>
           <select
@@ -96,7 +192,7 @@ const ListingsPage = () => {
             <option value="date-old">Date: Old to New</option>
           </select>
         </div>
-        
+
         <div className="mb-4 flex items-center">
           <input
             type="checkbox"
@@ -107,7 +203,7 @@ const ListingsPage = () => {
           />
           <label htmlFor="showParking" className="text-sm font-medium text-gray-700">Parking</label>
         </div>
-        
+
         <div className="mb-4 flex items-center">
           <input
             type="checkbox"
@@ -118,47 +214,25 @@ const ListingsPage = () => {
           />
           <label htmlFor="showFurnished" className="text-sm font-medium text-gray-700">Furnished</label>
         </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Search by Address:</label>
-          <input
-            type="text"
-            value={searchAddress}
-            onChange={handleAddressChange}
-            placeholder="Enter address"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Search by Name:</label>
-          <input
-            type="text"
-            value={searchName}
-            onChange={handleNameChange}
-            placeholder="Enter name"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
       </div>
 
       {/* Listings */}
       <div className="w-full md:w-[70%] lg:w-[75%] p-4">
         {listings.length === 0 ? (
           <div className="flex flex-wrap justify-center gap-4 my-4">
-            <ListingCardSkeleton/>
-            <ListingCardSkeleton/>
-            <ListingCardSkeleton/>
-            <ListingCardSkeleton/>
-            <ListingCardSkeleton/>
-            <ListingCardSkeleton/>
-            <ListingCardSkeleton/>
-            <ListingCardSkeleton/>
-            <ListingCardSkeleton/>
+            <ListingCardSkeleton />
+            <ListingCardSkeleton />
+            <ListingCardSkeleton />
+            <ListingCardSkeleton />
+            <ListingCardSkeleton />
+            <ListingCardSkeleton />
+            <ListingCardSkeleton />
+            <ListingCardSkeleton />
+            <ListingCardSkeleton />
           </div>
         ) : (
           <>
-            <div className="flex flex-wrap justify-center gap-4 my-4">
+            <div className="flex flex-wrap justify-center gap-5 my-4">
               {sortedAndFilteredListings.slice(0, visibleListings).map((item) => (
                 <ListingCard
                   key={item._id}
@@ -170,6 +244,9 @@ const ListingsPage = () => {
                   discountedPrice={item.discountPrice}
                   listingDate={item.createdAt}
                   location={item.address}
+                  beds={item.bedrooms}
+                  parking={item.parking}
+                  furnished={item.furnished}
                 />
               ))}
             </div>

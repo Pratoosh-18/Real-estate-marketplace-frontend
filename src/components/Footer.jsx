@@ -14,12 +14,12 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           {/* Logo and Description */}
           <div className="text-center md:text-left mb-4 md:mb-0">
-            <h1 className="text-2xl font-bold mb-2">EstateEdge | Real Estate Marketplace</h1>
-            <p className="text-gray-600">Connecting you with your dream home.</p>
+            <h1 className="text-base md:text-xl font-bold mb-2">EstateEdge | Real Estate Marketplace</h1>
+            <p className="text-sm text-gray-600">Connecting you with your dream home.</p>
           </div>
 
           {/* Navigation Links */}
-          <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mb-4 md:mb-0">
+          <div className="flex text-sm flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 mb-4 md:mb-0">
             <Link onClick={scrollToTop} to="/" className="text-gray-800 hover:text-blue-600 transition-colors">Home</Link>
             <Link onClick={scrollToTop} to="/about" className="text-gray-800 hover:text-blue-600 transition-colors">About Us</Link>
             <Link onClick={scrollToTop} to="/listings" className="text-gray-800 hover:text-blue-600 transition-colors">Listings</Link>
@@ -27,7 +27,7 @@ const Footer = () => {
           </div>
 
           {/* Social Media Icons */}
-          <div className="flex space-x-4">
+          <div className="text-sm flex space-x-4">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 transition-colors">
               <FaFacebookF size={20} />
             </a>
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-200 mt-6 pt-4 text-center text-gray-600 text-sm">
-          <p>&copy; {new Date().getFullYear()} Real Estate Marketplace. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} EstateEdge. All rights reserved.</p>
         </div>
       </div>
     </footer>
