@@ -18,6 +18,9 @@ import CreateListing from "./pages/CreateListing";
 import ListingsPage from "./pages/ListingsPage";
 import About from "./pages/About";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 {
   /* {import.meta.env.VITE_REACT_TESTING_ENV} */
 }
@@ -33,7 +36,7 @@ const AppContent = () => {
       <UserContextProvider>
         <ListingContextProvider>
           {/* {showNavbarAndFooter && <Navbar />} */}
-          <Navbar/>
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/listings" element={<ListingsPage />} />
@@ -45,7 +48,21 @@ const AppContent = () => {
             <Route path="/listing/:id" element={<ListingDetail />} />
           </Routes>
           {/* {showNavbarAndFooter && <Footer />} */}
-          <Footer/>
+          <Footer />
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          {/* Same as */}
+          <ToastContainer />
         </ListingContextProvider>
       </UserContextProvider>
     </>

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+import { toast } from 'react-toastify';
 
 const CreateListing = () => {
 
@@ -64,6 +65,16 @@ const CreateListing = () => {
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
       console.log('Listing created successfully:', response.data);
+      toast.success('Your listing is added !', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+        });
       navigate('/'); // Redirect to home page or any other page
     } catch (error) {
       console.error('Error creating listing:', error);

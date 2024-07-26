@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -25,6 +26,16 @@ const Login = () => {
       localStorage.setItem("realestatert", response.data.updatedUser.refreshToken);
       setError('');
       console.log(user)
+      toast.success('You are logged in !', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+        });
       navigate("/listings")
     } catch (err) {
       setError('Invalid email or password');

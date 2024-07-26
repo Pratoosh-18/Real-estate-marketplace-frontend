@@ -5,6 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const ListingDetail = () => {
   const { id } = useParams();
@@ -12,19 +13,37 @@ const ListingDetail = () => {
   const { user } = useContext(UserContext);
   const listing = listings.find((item) => item._id === id);
 
+  const [isBuying, setIsBuying] = useState(false)
+
   const [isSold, setIsSold] = useState(listing.isSold);
 
   if (!listing) return <div>Loading...</div>;
 
   const handleBuy = async () => {
     if (user && Object.keys(user).length > 0) {
+      setIsBuying(true)
       console.log("Buying.....");
-      const res = await axios.post(
-        "https://real-estate-marketplace-backend.onrender.com/api/v1/listing/buyListing",
-        { listingId: listing._id, buyerEmail: user.email }
-      );
-      console.log(res.data);
-      setIsSold(true);
+      try {
+        const res = await axios.post(
+          "https://real-estate-marketplace-backend.onrender.com/api/v1/listing/buyListing",
+          { listingId: listing._id, buyerEmail: user.email }
+        );
+        console.log(res.data);
+        setIsSold(true);
+        toast.success('Request sent. Await owner contact.', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+          });
+      } catch (error) {
+        setIsBuying(false)
+        console.log(error)
+      }
     } else {
       alert("You need to log in first");
     }
@@ -68,7 +87,7 @@ const ListingDetail = () => {
           <p className="text-lg mb-2">
             <strong>Owner:</strong> {listing.owner.username}
           </p>
-          <p className="text-md text-gray-600 mb-2">
+          <p className="text-md mb-2">
             <strong>Email:</strong> {listing.owner.email}
           </p>
           <p className="text-lg mb-2">
@@ -106,7 +125,10 @@ const ListingDetail = () => {
             onClick={handleBuy}
             className="w-[200px] h-11 rounded-md font-bold bg-blue-400 text-white"
           >
-            Buy
+            {
+              isBuying?"Processing ... ":"Buy"
+            }
+            
           </button>
         )}
       </div>

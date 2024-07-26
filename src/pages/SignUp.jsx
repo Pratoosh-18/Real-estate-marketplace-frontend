@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -35,6 +36,16 @@ const SignUp = () => {
       });
       console.log('Response:', response.data);
       setError('');
+      toast.success('You are sigined up !', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+        });
       navigate("/login")
       
     } catch (err) {
