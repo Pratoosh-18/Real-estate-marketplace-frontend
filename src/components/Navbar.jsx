@@ -19,6 +19,12 @@ const Navbar = () => {
     }
   }, [user]);
 
+  const handleClick = (path) => {
+    if(path === '/profile'){
+      navigate('/profile')
+    }
+  }
+
   useEffect(() => {
     setActiveLink(location.pathname);
   }, [location]);
