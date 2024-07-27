@@ -116,12 +116,21 @@ const ListingDetail = () => {
               Sold
             </div>
           ) : (
-            <button
+            <>
+            { isBuying ? <div
+              onClick={handleBuy}
+              className="w-full h-11 rounded-md font-bold bg-gray-600 text-white mt-4 transition-colors"
+            >
+              Processing ...
+            </div>:<button
               onClick={handleBuy}
               className="w-full h-11 rounded-md font-bold bg-blue-500 text-white mt-4 hover:bg-blue-600 transition-colors"
             >
-              {isBuying ? "Processing..." : "Buy"}
+              Buy
             </button>
+            }
+            </>
+            
           )}
         </div>
       </div>
