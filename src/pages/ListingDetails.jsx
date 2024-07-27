@@ -47,11 +47,15 @@ const ListingDetail = () => {
       alert("You need to log in first");
     }
   };
+  function capitalizeFirstLetter(string) {
+    if (!string) return string; // Check if the string is empty or undefined
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
   return (
-    <div className="container mx-auto p-4 relative bg-white shadow-lg rounded-lg">
-      <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">
-        {listing.name}
+    <div className="my-4 sm:my-10 container mx-auto p-4 relative bg-white shadow-lg rounded-lg">
+      <h1 className="text-xl md:text-4xl font-bold mb-6 text-center text-gray-700">
+        {capitalizeFirstLetter(listing.name)}
       </h1>
       <div className="w-full flex flex-col items-center">
         <div className="mb-6 w-full md:w-3/4">
@@ -70,38 +74,38 @@ const ListingDetail = () => {
         <div className="w-full md:w-3/4 bg-gray-100 p-6 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <p className="text-xl font-semibold mb-2 flex items-center">
+              <p className="md:text-xl font-semibold mb-2 flex items-center">
                 {/* <FaInfoCircle className="mr-2" /> */}
-                {listing.description}
+                {capitalizeFirstLetter(listing.description)}
               </p>
-              <p className="text-lg mb-2 flex items-center">
+              <p className="md:text-lg mb-2 flex items-center">
                 <FaMapMarkerAlt className="mr-2" /> Address: {listing.address}
               </p>
-              <p className="text-lg mb-2 flex items-center">
+              <p className="md:text-lg mb-2 flex items-center">
                 <FaUser className="mr-2" /> Owner: {listing.owner.username}
               </p>
-              <p className="text-lg mb-2 flex items-center">
+              <p className="md:text-lg mb-2 flex items-center">
                 <FaEnvelope className="mr-2" /> Email: {listing.owner.email}
               </p>
             </div>
             <div>
-              <p className="text-lg mb-2 flex items-center">
+              <p className="md:text-lg mb-2 flex items-center">
                 <FaBed className="mr-2" /> Bedrooms: {listing.bedrooms}
               </p>
-              <p className="text-lg mb-2 flex items-center">
+              <p className="md:text-lg mb-2 flex items-center">
                 <FaBath className="mr-2" /> Bathrooms: {listing.bathrooms}
               </p>
-              <p className="text-lg mb-2 flex items-center">
+              <p className="md:text-lg mb-2 flex items-center">
                 <FaCouch className="mr-2" /> Furnished: {listing.furnished ? "Yes" : "No"}
               </p>
-              <p className="text-lg mb-2 flex items-center">
+              <p className="md:text-lg mb-2 flex items-center">
                 <FaParking className="mr-2" /> Parking: {listing.parking ? "Yes" : "No"}
               </p>
-              <p className="text-2xl font-bold text-green-600 mb-2 flex items-center">
+              <p className="text-xl md:text-2xl font-bold text-green-600 mb-2 flex items-center">
                 <FaDollarSign className="mr-2" /> Price: ${listing.discountPrice ? listing.discountPrice.toLocaleString() : listing.regularPrice.toLocaleString()}
               </p>
               {listing.discountPrice && (
-                <p className="text-md text-gray-500 line-through mb-2">
+                <p className="text-gray-500 line-through mb-2">
                   Original Price: ${listing.regularPrice.toLocaleString()}
                 </p>
               )}
@@ -121,7 +125,7 @@ const ListingDetail = () => {
           )}
         </div>
       </div>
-      <div className="border-t border-gray-300 mt-6 pt-4 text-center text-gray-600 text-sm">
+      <div className="border-t border-gray-300 mt-6 pt-4 text-center text-gray-600 text-xs">
         <p>Listing created on {new Date(listing.createdAt).toLocaleDateString()}</p>
         <p>Last updated on {new Date(listing.updatedAt).toLocaleDateString()}</p>
       </div>
