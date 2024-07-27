@@ -24,8 +24,11 @@ const ListingDetail = () => {
     if (user && Object.keys(user).length > 0) {
       setIsBuying(true);
       try {
-        const res = await axios.post(import.meta.env.VITE_BUY_LISTING_API);
         setIsSold(true);
+        const res = await axios.post(import.meta.env.VITE_BUY_LISTING_API,{
+          buyerEmail:user.email,
+          listingId:listing._id
+        });
         toast.success('Request sent. Await owner contact.', {
           position: "bottom-right",
           autoClose: 5000,
@@ -37,7 +40,18 @@ const ListingDetail = () => {
           theme: "light"
         });
       } catch (error) {
+        toast.error('Unable to process request. Please try again later', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
         setIsBuying(false);
+        setIsSold(false)
         console.error(error);
       }
     } else {
@@ -116,7 +130,7 @@ const ListingDetail = () => {
             <>
             { isBuying ? <div
               onClick={handleBuy}
-              className="w-full h-11 rounded-md font-bold bg-gray-600 text-white mt-4 transition-colors"
+              className="flex justify-center items-center w-full h-11 rounded-md font-bold bg-gray-600 text-white mt-4 transition-colors"
             >
               Processing ...
             </div>:<button

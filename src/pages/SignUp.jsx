@@ -37,7 +37,7 @@ const SignUp = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Response:', response.data);
+      // console.log('Response:', response.data);
       setError('');
       toast.success('You are sigined up !', {
         position: "bottom-right",

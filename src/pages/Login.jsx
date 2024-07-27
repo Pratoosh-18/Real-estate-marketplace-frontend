@@ -28,7 +28,7 @@ const Login = () => {
       setUser(response.data.updatedUser)
       localStorage.setItem("realestatert", response.data.updatedUser.refreshToken);
       setError('');
-      console.log(user)
+      // console.log(user)
       toast.success('You are logged in !', {
         position: "bottom-right",
         autoClose: 5000,

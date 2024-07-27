@@ -67,7 +67,7 @@ const CreateListing = () => {
         formDataToSend,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
-      console.log('Listing created successfully:', response.data);
+      // console.log('Listing created successfully:', response.data);
       toast.success('Your listing is added !', {
         position: "bottom-right",
         autoClose: 5000,

@@ -22,7 +22,7 @@ const ListingsPage = () => {
       const response = await axios.get(import.meta.env.VITE_GET_LISTINGS_API);
       const reversedListings = response.data.listings.reverse();
       setListings(reversedListings);
-      console.log(listings);
+      // console.log(listings);
     };
 
     getAllListings();
@@ -47,9 +47,9 @@ const ListingsPage = () => {
   const sortListings = (listings) => {
     switch (sortOption) {
       case "price-low-high":
-        return [...listings].sort((a, b) => a.regularPrice - b.regularPrice);
+        return [...listings].sort((a, b) => a.discountPrice - b.discountPrice);
       case "price-high-low":
-        return [...listings].sort((a, b) => b.regularPrice - a.regularPrice);
+        return [...listings].sort((a, b) => b.discountPrice - a.discountPrice);
       case "date-old":
         return [...listings].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
       case "date-new":
