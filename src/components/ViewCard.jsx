@@ -21,7 +21,7 @@ const ViewCard = ({
   return (
     <div
       key={id}
-      className="w-[250px] flex flex-col rounded overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
+      className="w-[300px] sm:w-[250px] flex flex-col rounded overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300"
     >
       <Link onClick={scrollToTop} to={`/listings`} className="block h-full">
         <div className="flex flex-col h-full">

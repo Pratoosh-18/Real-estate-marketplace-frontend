@@ -6,6 +6,7 @@ import axios from "axios";
 import { FaCopy, FaCouch, FaParking } from "react-icons/fa";
 import { toast } from "react-toastify";
 
+
 const Profile = () => {
   const ProfileListingCard = ({ listing, bg, onDelete }) => {
     const [isDeleting, setIsDeleting] = useState(false);
@@ -34,6 +35,16 @@ const Profile = () => {
           theme: "light"
           });
       } catch (error) {
+        toast.error('Unable to delete listing at this moment !', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+          });
         setIsDeleting(false);
         console.error(
           "Error deleting listing:",
@@ -53,10 +64,10 @@ const Profile = () => {
 
     return (
       <div
-        className={`w-full flex justify-between bg-${bg} shadow-md rounded-lg p-6 mt-10 mb-10`}
+        className={`w-fit md:w-full flex flex-col md:flex-row justify-between bg-${bg} shadow-md rounded-lg p-6 mt-10 mb-10`}
       >
-        <div className={`w-full h-fit justify-between flex items-center space-x-4`}>
-          <div className="flex gap-5">
+        <div className={`w-full h-fit justify-between flex flex-col md:flex-row items-center space-x-4`}>
+          <div className="flex gap-5 flex-col md:flex-row">
             <img
               className="h-36 lg:h-56 rounded object-cover"
               src={listing.imageUrls[0]}
@@ -240,19 +251,31 @@ const Profile = () => {
           </div>
         </>
       ) : (
-        <>
-          <div>OOPS</div>
-          <div>You need to login first </div>
-        </>
+        <div className="flex h-[90vh] w-full justify-center items-center flex-col">
+          <section class="text-black">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+        <div class="mx-auto max-w-screen-sm text-center">
+            <h1 class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500">404</h1>
+            <p class="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl">Something's missing.</p>
+            <p class="mb-4 text-lg font-light text-gray-600">It seems you need to log in to access this page.</p>
+            <div className="flex flex-col w-full">
+
+          <Link to={"/"} class="flex justify-center items-center  border-2 border-black text-black bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4">Back to Homepage</Link>
+            <Link to={"/login"} class="flex justify-center items-center  border-2 border-black text-black bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4">Login</Link>
+            </div>
+        </div>   
+    </div>
+</section>
+        </div>
       )}
 
-      <div className="sm:px-[3%] md:px-[5%]">
+      <div className="px-[3%] md:px-[5%] flex flex-col">
         {userListings.length > 0 ? (
-          <>
+          <div className>
             <h2 className="text-2xl font-semibold text-gray-800 mt-10">
               Your Listings:
             </h2>
-            <div>
+            <div className="flex flex-col justify-center items-center">
               {soldListings.length > 0 ? (
                 <>
                   <h3 className="text-xl font-medium text-gray-800 mt-6">
@@ -297,7 +320,7 @@ const Profile = () => {
                 <></>
               )}
             </div>
-          </>
+          </div>
         ) : (
           <></>
         )}
