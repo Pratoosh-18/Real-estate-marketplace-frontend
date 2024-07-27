@@ -25,7 +25,7 @@ const ListingDetail = () => {
       setIsBuying(true);
       try {
         setIsSold(true);
-        const res = await axios.post(import.meta.env.VITE_BUY_LISTING_API,{
+        const res = await axios.post("https://real-estate-marketplace-backend.onrender.com/api/v1/listing/buyListing",{
           buyerEmail:user.email,
           listingId:listing._id
         });

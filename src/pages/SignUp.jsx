@@ -32,7 +32,7 @@ const SignUp = () => {
     formData.append('coverImg', coverImg);
 
     try {
-      const response = await axios.post(import.meta.env.VITE_SIGNIN_API, formData, {
+      const response = await axios.post("https://real-estate-marketplace-backend.onrender.com/api/v1/user/register", formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

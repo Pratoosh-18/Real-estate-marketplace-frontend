@@ -63,7 +63,7 @@ const CreateListing = () => {
     }
 
     try {
-      const response = await axios.post(import.meta.env.VITE_CREATE_LISINTG_API,
+      const response = await axios.post("https://real-estate-marketplace-backend.onrender.com/api/v1/listing/create",
         formDataToSend,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );

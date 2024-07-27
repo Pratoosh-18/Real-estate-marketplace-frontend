@@ -15,7 +15,7 @@ const Profile = () => {
       try {
         setIsDeleting(true);
         console.log(listing._id);
-        const res = await axios.delete(import.meta.env.VITE_DELETE_LISTING_API,
+        const res = await axios.delete("https://real-estate-marketplace-backend.onrender.com/api/v1/listing/deleteListing",
           {
             data: { listingId: listing._id },
           }

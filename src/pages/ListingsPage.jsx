@@ -19,7 +19,7 @@ const ListingsPage = () => {
 
   useEffect(() => {
     const getAllListings = async () => {
-      const response = await axios.get(import.meta.env.VITE_GET_LISTINGS_API);
+      const response = await axios.get("https://real-estate-marketplace-backend.onrender.com/api/v1/listing/getListings");
       const reversedListings = response.data.listings.reverse();
       setListings(reversedListings);
       // console.log(listings);
