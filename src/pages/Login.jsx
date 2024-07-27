@@ -22,8 +22,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://real-estate-marketplace-backend.onrender.com/api/v1/user/login', { email, password });
-      // const response = await axios.post('http://localhost:8000/api/v1/user/login', { email, password });
+      const response = await axios.post(import.meta.env.VITE_LOGIN_API, { email, password });
+      
       setUserData(response.data.updatedUser);
       setUser(response.data.updatedUser)
       localStorage.setItem("realestatert", response.data.updatedUser.refreshToken);

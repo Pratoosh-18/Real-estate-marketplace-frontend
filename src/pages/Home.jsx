@@ -12,9 +12,7 @@ const Home = () => {
   useEffect(() => {
     const refreshServer = async () => {
       try {
-        const res = await axios.get(
-          "https://real-estate-marketplace-backend.onrender.com/"
-        );
+        const res = await axios.get(import.meta.env.VITE_APP_API);
         console.log(res.data);
       } catch (error) {
         console.error("Error refreshing server:", error);
@@ -24,9 +22,7 @@ const Home = () => {
 
     const getList = async () => {
       try {
-        const response = await axios.get(
-          "https://real-estate-marketplace-backend.onrender.com/api/v1/listing/getListings"
-        );
+        const response = await axios.get(import.meta.env.VITE_GET_LISTINGS_API);
         if (Array.isArray(response.data.listings)) {
           const listings = response.data.listings;
           const shuffledList = shuffleArray(listings);

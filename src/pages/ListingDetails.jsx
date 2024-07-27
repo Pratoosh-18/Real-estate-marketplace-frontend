@@ -24,10 +24,7 @@ const ListingDetail = () => {
     if (user && Object.keys(user).length > 0) {
       setIsBuying(true);
       try {
-        const res = await axios.post(
-          "https://real-estate-marketplace-backend.onrender.com/api/v1/listing/buyListing",
-          { listingId: listing._id, buyerEmail: user.email }
-        );
+        const res = await axios.post(import.meta.env.VITE_BUY_LISTING_API);
         setIsSold(true);
         toast.success('Request sent. Await owner contact.', {
           position: "bottom-right",

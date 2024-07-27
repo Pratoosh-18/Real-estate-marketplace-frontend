@@ -32,7 +32,7 @@ const SignUp = () => {
     formData.append('coverImg', coverImg);
 
     try {
-      const response = await axios.post('https://real-estate-marketplace-backend.onrender.com/api/v1/user/register', formData, {
+      const response = await axios.post(import.meta.env.VITE_SIGNIN_API, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -60,7 +60,7 @@ const SignUp = () => {
 
   return (
     <div className="flex mb-10 items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+      <div className="w-full mb-10 max-w-md bg-white rounded-lg shadow-md p-8">
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
