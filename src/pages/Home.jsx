@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Carousel from "../components/Carousel";
 import axios from "axios";
 import HomeBanner from "../components/HomeBanner";
-import ListingCard from "../components/ListingCard";
 import ViewCard from "../components/ViewCard";
+import ListingCardSkeleton from "../components/ListingCardSkeleton";
 
 const Home = () => {
   const [list1, setList1] = useState([]);
@@ -71,6 +71,16 @@ const Home = () => {
       <div>
         <h2 className="text-xl font-semibold mb-4">Featured Properties</h2>
         <div className="flex flex-wrap gap-4 justify-center md:justify-normal">
+          {
+            list1.length > 0? <></>:<>
+              <ListingCardSkeleton/>
+              <ListingCardSkeleton/>
+              <ListingCardSkeleton/>
+              <ListingCardSkeleton/>
+              <ListingCardSkeleton/>
+              <ListingCardSkeleton/>
+            </>
+          }
           {list1.map((item) => (
             <ViewCard
             key={item._id}
@@ -92,6 +102,16 @@ const Home = () => {
       <div>
         <h2 className="text-xl font-semibold mb-4 mt-10">Best Deals</h2>
         <div className="flex flex-wrap gap-4 justify-center md:justify-normal">
+        {
+            list2.length > 0? <></>:<>
+              <ListingCardSkeleton/>
+              <ListingCardSkeleton/>
+              <ListingCardSkeleton/>
+              <ListingCardSkeleton/>
+              <ListingCardSkeleton/>
+              <ListingCardSkeleton/>
+            </>
+          }
           {list2.map((item) => (
             <ViewCard
               key={item._id}

@@ -8,6 +8,9 @@ const CreateListing = () => {
 
     const {user} = useContext(UserContext)
     const email = user.email
+
+    const [isCreating, setIsCreating] = useState(false)
+
   const [formData, setFormData] = useState({
     ownerEmail: email,
     name: '',
@@ -46,6 +49,7 @@ const CreateListing = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsCreating(true)
 
     const formDataToSend = new FormData();
     for (const key in formData) {
@@ -77,30 +81,22 @@ const CreateListing = () => {
         });
       navigate('/'); // Redirect to home page or any other page
     } catch (error) {
+      setIsCreating(false)
       console.error('Error creating listing:', error);
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6 mt-10">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">Create Listing</h2>
+    <div className="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6 mt-10 mb-10">
+      <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-6">Create Listing</h2>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 gap-4">
-          {/* <input 
-            type="email" 
-            name="ownerEmail" 
-            value={formData.ownerEmail} 
-            onChange={handleChange} 
-            placeholder="Owner Email" 
-            className="border p-2 rounded"
-            required 
-          /> */}
           <input 
             type="text" 
             name="name" 
             value={formData.name} 
             onChange={handleChange} 
-            placeholder="Name" 
+            placeholder="Listing name" 
             className="border p-2 rounded"
             required 
           />
@@ -186,12 +182,20 @@ const CreateListing = () => {
             required 
           />
         </div>
-        <button 
+        {
+          isCreating ? <div 
+          type="submit" 
+          className="flex justify-center items-center bg-gray-600 text-white px-4 py-2 rounded mt-4 w-full transition"
+        >
+          Processing ... 
+        </div>:<button 
           type="submit" 
           className="bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full hover:bg-blue-600 transition"
         >
           Create Listing
         </button>
+        }
+        
       </form>
     </div>
   );

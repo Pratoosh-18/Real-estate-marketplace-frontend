@@ -11,6 +11,8 @@ const SignUp = () => {
   const [coverImgPreview, setCoverImgPreview] = useState(null);
   const [error, setError] = useState('');
 
+  const [isLoading, setIsLoading] = useState(false)
+
   let navigate = useNavigate();
 
   const handleCoverImgChange = (e) => {
@@ -20,6 +22,7 @@ const SignUp = () => {
   };
 
   const handleSubmit = async (e) => {
+    setIsLoading(true)
     e.preventDefault();
 
     const formData = new FormData();
@@ -49,13 +52,14 @@ const SignUp = () => {
       navigate("/login")
       
     } catch (err) {
+      setIsLoading(false)
       setError('Error creating account');
       console.error('Error:', err);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex mb-10 items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         <form onSubmit={handleSubmit}>
@@ -117,12 +121,20 @@ const SignUp = () => {
           )}
           {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
           <div className="flex items-center justify-between">
-            <button
+            {
+              isLoading?<div
+              type="submit"
+              className="w-full flex justify-center items-center bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Loading ...
+            </div>:<button
               type="submit"
               className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Sign Up
             </button>
+            }
+            
           </div>
         </form>
       </div>

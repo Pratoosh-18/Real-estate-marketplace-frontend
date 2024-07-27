@@ -13,9 +13,12 @@ const Login = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState('');
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
+    setIsLoading(true)
     e.preventDefault();
 
     try {
@@ -38,6 +41,7 @@ const Login = () => {
         });
       navigate("/listings")
     } catch (err) {
+      setIsLoading(false)
       setError('Invalid email or password');
     }
   };
@@ -75,12 +79,21 @@ const Login = () => {
           </div>
           {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
           <div className="flex items-center justify-between">
-            <button
+            {
+              isLoading ? <div
+              type="submit"
+              className="w-full flex justify-center items-center bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Loading ...
+            </div>:<button
               type="submit"
               className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Log In
             </button>
+            }
+            
+
           </div>
         </form>
         {userData && (

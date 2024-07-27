@@ -61,6 +61,13 @@ const About = () => {
           We’d love to hear from you! Whether you have a question, need assistance, or want to provide feedback, our team is here to help. Reach out to us at [Contact Information] or visit our [Contact Us] page for more details.
         </p>
       </div>
+
+      <div className="mt-10">
+        <h3 className="text-lg leading-6 font-medium text-gray-900">About the Developer</h3>
+        <p className="mt-2 text-base text-gray-600">
+          This project was developed by <span className="font-bold text-indigo-600">Pratoosh Garg</span>, a passionate web developer dedicated to creating seamless and efficient web experiences. If you have any questions or need further assistance, feel free to reach out to Pratoosh at <span className="font-bold text-indigo-600">pratoosh10garg@gmail.com</span> <button onClick={() => navigator.clipboard.writeText('pratoosh10garg@gmail.com')} className="ml-2 inline-flex items-center px-2 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-600 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"><svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8.586 2.586a2 2 0 012.828 0L14 5.172a2 2 0 010 2.828l-6 6a2 2 0 01-2.828 0L4 11.828a2 2 0 010-2.828l6-6zm5.707 6.707L10 3.414 4.707 8.707a1 1 0 001.414 1.414L10 6.414l3.293 3.293a1 1 0 001.414-1.414z" /></svg></button>
+        </p>
+      </div>
     </div>
   )
 }
