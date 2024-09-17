@@ -35,7 +35,6 @@ const AppContent = () => {
     <>
       <UserContextProvider>
         <ListingContextProvider>
-          {/* {showNavbarAndFooter && <Navbar />} */}
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -47,7 +46,6 @@ const AppContent = () => {
             <Route path="/about" element={<About />} />
             <Route path="/listing/:id" element={<ListingDetail />} />
           </Routes>
-          {/* {showNavbarAndFooter && <Footer />} */}
           <Footer />
           <ToastContainer
             position="bottom-right"
