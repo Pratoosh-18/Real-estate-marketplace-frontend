@@ -21,16 +21,9 @@ import About from "./pages/About";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-{
-  /* {import.meta.env.VITE_REACT_TESTING_ENV} */
-}
 
 const AppContent = () => {
-  // const location = useLocation();
-
-  // const showNavbarAndFooter =
-  //   location.pathname !== "/signup" && location.pathname !== "/login";
-
+  
   return (
     <>
       <UserContextProvider>
@@ -59,7 +52,6 @@ const AppContent = () => {
             pauseOnHover
             theme="light"
           />
-          {/* Same as */}
           <ToastContainer />
         </ListingContextProvider>
       </UserContextProvider>
